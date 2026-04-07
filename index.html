@@ -31,7 +31,56 @@
                         radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
             z-index: -1;
         }
+/* Career Map Visuals */
+        .map-section {
+            padding: 60px 40px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            margin: 40px 0;
+            position: relative;
+        }
 
+        .career-line {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding-top: 50px;
+        }
+
+        .career-line::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 5%;
+            width: 90%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            opacity: 0.3;
+        }
+
+        .milestone {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 0 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px var(--primary);
+            z-index: 2;
+        }
+
+        .milestone h4 { margin: 0; color: var(--primary); font-family: 'Space Grotesk'; }
+        .milestone span { font-size: 0.8rem; color: #94a3b8; font-weight: bold; }
         /* Hero Section */
         header { padding: 80px 0; border-bottom: 1px solid var(--border); }
         h1 { font-size: 5rem; font-weight: 800; letter-spacing: -2px; margin: 0; }
@@ -78,6 +127,37 @@
                 Full Stack Architect specializing in high-performance .NET systems and cross-platform architecture. Based in Durban, ZA.
             </p>
         </header>
+
+    <!-- LIVE CAREER MAP -->
+    <section class="map-section">
+        <h2 style="margin-top: 0; font-family: 'Space Grotesk';">Live Career Map</h2>
+        <div class="career-line">
+            <div class="milestone">
+                <div class="dot"></div>
+                <span>2014 - 2016</span>
+                <h4>UKZN Honours</h4>
+                <p style="font-size: 0.85rem;">Bee ID Research & Academic Distinctions</p>
+            </div>
+            <div class="milestone">
+                <div class="dot"></div>
+                <span>2016 - 2019</span>
+                <h4>Derivco</h4>
+                <p style="font-size: 0.85rem;">High-Load Gambling Systems Architecture</p>
+            </div>
+            <div class="milestone">
+                <div class="dot"></div>
+                <span>2019 - 2020</span>
+                <h4>LexisNexis</h4>
+                <p style="font-size: 0.85rem;">API Integration & Verification Platforms</p>
+            </div>
+            <div class="milestone">
+                <div class="dot" style="background: var(--accent); box-shadow: 0 0 15px var(--accent);"></div>
+                <span>2022 - PRESENT</span>
+                <h4>FNZ</h4>
+                <p style="font-size: 0.85rem;">Global Financial Rules Engines & QA Automation</p>
+            </div>
+        </div>
+    </section>
 
         <div class="dashboard">
             <!-- NuGet Impact Card -->
