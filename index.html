@@ -115,6 +115,15 @@
 
         /* Thesis Highlight */
         .thesis-tag { font-size: 0.8rem; background: #fbbf24; color: #000; padding: 4px 12px; border-radius: 20px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .career-line { flex-direction: column; gap: 40px; }
+            .career-line::after { display: none; }
+            .dot { left: 0; top: 10px; }
+            .milestone { text-align: left; padding-left: 30px; }
+            .nuget-grid { grid-template-columns: 1fr; }
+        }
+        
     </style>
 </head>
 <body>
