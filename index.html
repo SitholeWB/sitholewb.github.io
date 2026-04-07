@@ -1,205 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sithole WB | Full Stack Architect</title>
+    <title>Sithole WB | Full Stack Engineer</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
-            --primary: #0ea5e9;
-            --accent: #f43f5e;
-            --bg: #020617;
-            --card: rgba(15, 23, 42, 0.7);
+            --bg: #0b0f1a;
+            --card: #161b2a;
+            --primary: #3b82f6;
+            --accent: #10b981;
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
             --border: rgba(255, 255, 255, 0.1);
         }
 
         body {
             background: var(--bg);
-            color: #f1f5f9;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            overflow-x: hidden;
+            padding: 20px;
+            line-height: 1.5;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-
-        /* Career Map Visuals */
-        .map-section {
-            padding: 60px 40px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 32px;
-            margin: 40px 0;
-            position: relative;
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        .career-line {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            padding-top: 50px;
+        /* Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
-        .career-line::after {
-            content: '';
-            position: absolute;
-            top: 25px;
-            left: 5%;
-            width: 90%;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            opacity: 0.3;
-        }
-
-        .milestone {
-            flex: 1;
-            text-align: center;
-            position: relative;
-            padding: 0 15px;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 0 15px var(--primary);
-            z-index: 2;
-        }
-
-        .milestone h4 { margin: 0; color: var(--primary); font-family: 'Space Grotesk'; }
-        .milestone span { font-size: 0.8rem; color: #94a3b8; font-weight: bold; }
-
-        /* NuGet Cards */
-        .nuget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .nuget-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-        .nuget-card:hover { border-color: var(--primary); background: rgba(14, 165, 233, 0.05); }
-
-        .stat-badge { font-size: 2rem; font-weight: 800; color: var(--primary); }
-
-        .card-container {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 32px;
-            backdrop-filter: blur(10px);
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 32px;
-            backdrop-filter: blur(10px);
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            padding: 25px;
+            transition: 0.3s;
         }
-        .card:hover { border-color: var(--primary); background: rgba(14, 165, 233, 0.05); }
-		.nuget-badge {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(14, 165, 233, 0.1);
-            padding: 15px; border-radius: 12px; margin-bottom: 15px;
-            text-decoration: none; color: inherit;
-        }
-        .stat-val { font-family: 'Space Grotesk', monospace; font-weight: 700; color: var(--primary); font-size: 1.5rem; }
 
-        .btn-main {
-            display: inline-block; padding: 12px 24px; background: var(--primary);
-            color: white; border-radius: 12px; text-decoration: none; font-weight: 700;
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
         }
-        @media (max-width: 768px) {
-            .career-line { flex-direction: column; gap: 40px; }
-            .career-line::after { display: none; }
-            .dot { left: 0; top: 10px; }
-            .milestone { text-align: left; padding-left: 30px; }
-            .nuget-grid { grid-template-columns: 1fr; }
+
+        .span-2 {
+            grid-column: span 2;
+        }
+
+        .span-3 {
+            grid-column: span 3;
+        }
+
+        /* Career Map Styling */
+        .timeline {
+            border-left: 2px solid var(--primary);
+            margin: 10px 0 10px 20px;
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -39px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid var(--bg);
+        }
+
+        .company-name {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .job-title {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin: 2px 0 10px 0;
+        }
+
+        .job-desc {
+            font-size: 0.85rem;
+            margin: 0;
+            padding-left: 15px;
+        }
+
+        .job-desc li {
+            margin-bottom: 5px;
+        }
+
+        /* NuGet/Stats Styling */
+        .stat-box {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+            border: 1px solid transparent;
+        }
+
+        .stat-box:hover {
+            border-color: var(--primary);
+        }
+
+        .stat-num {
+            font-family: 'JetBrains Mono';
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #1e293b;
+            color: var(--text-dim);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            margin-top: 5px;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 850px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .span-2,
+            .span-3 {
+                grid-column: span 1;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <header style="margin-bottom: 60px;">
-        <h1 style="font-size: 4.5rem; line-height: 0.9;">Welcome <br><span style="color: var(--primary);">Sithole</span></h1>
-        <p style="font-size: 1.5rem; color: #94a3b8; max-width: 600px; margin-top: 20px;">
-            Full Stack Architect | Open Source Creator | Systems Specialist
-        </p>
-    </header>
+    <div class="container">
+        <!-- Enhanced Header Section -->
+        <header style="margin-bottom: 60px; position: relative;">
+            <!-- Live Status Pill -->
+            <div
+                style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); padding: 4px 12px; border-radius: 100px; margin-bottom: 20px;">
+                <span
+                    style="width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; box-shadow: 0 0 10px var(--accent);"></span>
+                <span
+                    style="font-size: 0.75rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase;">Full
+                    Stack Engineer</span>
+            </div>
 
-    <!-- LIVE CAREER MAP -->
-    <section class="map-section">
-        <h2 style="margin-top: 0; font-family: 'Space Grotesk';">Live Career Map</h2>
-        <div class="career-line">
-            <div class="milestone">
-                <div class="dot"></div>
-                <span>2014 - 2016</span>
-                <h4>UKZN Honours</h4>
-                <p style="font-size: 0.85rem;">Bee ID Research & Academic Distinctions</p>
-            </div>
-            <div class="milestone">
-                <div class="dot"></div>
-                <span>2016 - 2019</span>
-                <h4>Derivco</h4>
-                <p style="font-size: 0.85rem;">Gambling & Internal Systems</p>
-            </div>
-            <div class="milestone">
-                <div class="dot"></div>
-                <span>2019 - 2020</span>
-                <h4>LexisNexis</h4>
-                <p style="font-size: 0.85rem;">API Integration & Verification Platforms</p>
-            </div>
-            <div class="milestone">
-                <div class="dot" style="background: var(--accent); box-shadow: 0 0 15px var(--accent);"></div>
-                <span>2022 - PRESENT</span>
-                <h4>FNZ</h4>
-                <p style="font-size: 0.85rem;">Global Financial Rules Engines & QA Automation</p>
-            </div>
-        </div>
-    </section>
- <div class="card-container">
-    <!-- NUGET IMPACT -->
-    <h2 style="font-family: 'Space Grotesk';">Open Source Impact</h2>
-    <div class="nuget-grid">
-        <a href="https://www.nuget.org/packages/Pagination.EntityFrameworkCore.Extensions" class="nuget-card" target="_blank">
-            <div class="stat-badge">53,100+</div>
-            <p><strong>Pagination.EFCore.Extensions</strong></p>
-            <p style="font-size: 0.85rem; color: #94a3b8;">Industry-standard list pagination for .NET developers.</p>
-        </a>
-        <a href="https://www.nuget.org/packages/Files.EntityFrameworkCore.Extensions" class="nuget-card" target="_blank">
-            <div class="stat-badge">12,100+</div>
-            <p><strong>Files.EFCore.Extensions</strong></p>
-            <p style="font-size: 0.85rem; color: #94a3b8;">High-efficiency SQL file chunking & memory management.</p>
-        </a>
-    </div> </div>
-            <!-- Tech Stack Card -->
-            <div class="card">
-                <h3>Core Stack</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <span class="btn-main" style="background: rgba(14, 165, 233, 0.2); color: var(--primary);">.NET Core</span>
-                    <span class="btn-main" style="background: rgba(14, 165, 233, 0.2); color: var(--primary);">JavaScript</span>
-                    <span class="btn-main" style="background: rgba(14, 165, 233, 0.2); color: var(--primary);">React</span>
-                    <span class="btn-main" style="background: rgba(14, 165, 233, 0.2); color: var(--primary);">MongoDB</span>
-                    <span class="btn-main" style="background: rgba(14, 165, 233, 0.2); color: var(--primary);">SQL Server</span>
-                    <span class="btn-main" style="background: rgba(14, 165, 233, 0.2); color: var(--primary);">NodeJS</span>
-                    <span class="btn-main" style="background: rgba(14, 165, 233, 0.2); color: var(--primary);">Flutter</span>
+            <div
+                style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+                <div>
+                    <h1
+                        style="font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; margin: 0; line-height: 0.9; letter-spacing: -3px; color: #fff;">
+                        Welcome <span style="color: var(--primary);"> Sithole</span>
+                    </h1>
+
+                </div>
+
+                <!-- Quick Action Links -->
+                <div style="display: flex; gap: 15px;">
+                    <a href="https://github.com/SitholeWB" target="_blank"
+                        style="background: #1e293b; border: 1px solid var(--border); padding: 12px 20px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: 700; font-size: 0.9rem; transition: 0.3s;">
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/sitholewb/"
+                        style="background: var(--primary); padding: 12px 24px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: 800; font-size: 0.9rem; box-shadow: 0 10px 20px -10px var(--primary); transition: 0.3s;">
+                        LinkedIn
+                    </a>
                 </div>
             </div>
-    <footer style="margin-top: 80px; text-align: center; color: #475569; font-size: 0.9rem;">
-        &copy; 2026 Sithole WB Portfolio | Architecture & Engineering
-    </footer>
-</div>
+
+            <!-- Metadata Bar -->
+            <div
+                style="margin-top: 30px; display: flex; gap: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
+                <div style="display: flex; flex-direction: column;">
+                    <span
+                        style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Experience</span>
+                    <span style="font-weight: 700; color: #fff;">8+ Years</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <span
+                        style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Location</span>
+                    <span style="font-weight: 700; color: #fff;">Durban, ZA</span>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <span
+                        style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Community
+                        Impact</span>
+                    <span style="font-weight: 700; color: var(--primary);">64k+ Downloads</span>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="bento-grid">
+
+            <!-- Detailed Career Map -->
+            <div class="card span-2">
+                <h2 style="margin-top: 0;">Live Career Map</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <p class="company-name">FNZ Group <span
+                                style="float:right; font-size: 0.8rem; color: var(--text-dim);">2022 - Present</span>
+                        </p>
+                        <p class="job-title">Software Developer (Full Stack)</p>
+                        <ul class="job-desc">
+                            <li>Developing **rules-based financial systems** and investor platforms.</li>
+                            <li>Automated quality checks for large-scale financial deployments.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="company-name">immedia <span
+                                style="float:right; font-size: 0.8rem; color: var(--text-dim);">2020 - 2021</span></p>
+                        <p class="job-title">Software Developer</p>
+                        <ul class="job-desc">
+                            <li>Built **Azure-hosted** web applications and payment engines.</li>
+                            <li>Delivered cross-platform mobile apps using Flutter.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="company-name">LexisNexis <span
+                                style="float:right; font-size: 0.8rem; color: var(--text-dim);">2019 - 2020</span></p>
+                        <p class="job-title">Software Engineer</p>
+                        <ul class="job-desc">
+                            <li>Engineered **verification applications** for recruitment agencies.</li>
+                            <li>Specialized in 3rd party API integration and troubleshooting.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <p class="company-name">Derivco <span
+                                style="float:right; font-size: 0.8rem; color: var(--text-dim);">2016 - 2019</span></p>
+                        <p class="job-title">Software Developer</p>
+                        <ul class="job-desc">
+                            <li>Developed **high-availability online gambling systems**.</li>
+                            <li>Focused on SQL performance and high-concurrency architecture.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NuGet Stats Side Column -->
+            <!-- Enhanced NuGet Section -->
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <h2 style="margin: 0;">NuGet Ecosystem Impact</h2>
+                    <span class="tag"
+                        style="background: rgba(16, 185, 129, 0.1); color: var(--accent); border-color: var(--accent);">Verified
+                        Author</span>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 20px;">
+                    Architecting high-performance extensions for EntityFrameworkCore, downloaded by developers globally.
+                </p>
+
+                <!-- Primary Package: Pagination -->
+                <a href="https://www.nuget.org/packages/Pagination.EntityFrameworkCore.Extensions" class="stat-box"
+                    target="_blank" style="margin-bottom: 15px; border-left: 4px solid var(--primary);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong
+                                style="font-size: 1.1rem; display: block;">Pagination.EntityFrameworkCore.Extensions</strong>
+                            <span style="font-size: 0.75rem; color: var(--text-dim);">IQueryable & IEnumerable
+                                Pagination</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="stat-num">53.1k+</span>
+                            <span
+                                style="display: block; font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase;">Downloads</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Secondary Package: Files -->
+                <a href="https://www.nuget.org/packages/Files.EntityFrameworkCore.Extensions" class="stat-box"
+                    target="_blank" style="border-left: 4px solid var(--accent);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong
+                                style="font-size: 1.1rem; display: block;">Files.EntityFrameworkCore.Extensions</strong>
+                            <span style="font-size: 0.75rem; color: var(--text-dim);">Efficient SQL File
+                                Management</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="stat-num">12.1k+</span>
+                            <span
+                                style="display: block; font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase;">Downloads</span>
+                        </div>
+                    </div>
+                </a>
+
+                <div
+                    style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px dashed var(--border);">
+                    <p style="margin: 0; font-size: 0.8rem; color: var(--text-dim);">
+                        <strong>Key Metrics:</strong> High-performance list pagination and file chunking extensions used
+                        in enterprise .NET Core architectures.
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Academic & Stack -->
+            <div class="card">
+                <h3>Stack</h3>
+                <div class="tag">C#</div>
+                <div class="tag">ASP.NET Core</div>
+                <div class="tag">JavaScript</div>
+                <div class="tag">React</div>
+                <div class="tag">NodeJS</div>
+                <div class="tag">SQL Server</div>
+                <div class="tag">Flutter</div>
+                <div class="tag">Azure</div>
+                <div class="tag">MongoDB</div>
+            </div>
+
+            <div class="card span-2">
+                <h3 style="margin-top: 0;">Education & Research</h3>
+                <p style="margin: 0;"><strong>BSc Honours in Computer Science</strong> | University of KwaZulu-Natal</p>
+                <p style="font-size: 0.9rem; color: var(--text-dim); margin: 5px 0;">Thesis: <i>"Automatic
+                        identification of bees from wing pattern images"</i></p>
+                <div style="margin-top: 10px;">
+                    <span class="tag" style="border-color: var(--accent); color: var(--accent);">Calculus
+                        Distinction</span>
+                    <span class="tag" style="border-color: var(--accent); color: var(--accent);">OOP Distinction</span>
+                    <span class="tag" style="border-color: var(--accent); color: var(--accent);">Data Structures
+                        Distinction</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </body>
+
 </html>
